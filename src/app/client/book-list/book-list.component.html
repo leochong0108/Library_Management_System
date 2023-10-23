@@ -1,0 +1,22 @@
+<div class="container" style="height: 50vh;">
+  <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: center;">
+  <label>
+    <input type="checkbox" [(ngModel)]="searchByCategory"> Search by Category
+  </label>
+  <table class="table table-hover table-striped" style="margin-top: 50px;">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Title</th>
+        <th>author</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of filteredBook">
+        <td>{{b.category_Id}}</td>
+        <td>{{b.book_Title}}</td>
+        <td>{{b.author}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

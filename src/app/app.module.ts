@@ -9,6 +9,10 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ClientRoutingModule } from './client/client-routing.module';
 import { AdminRoutingModule } from './admin/admin-routing.module';
+import { NavbarComponent } from './client/navbar/navbar.component';
+import { BookListComponent } from './client/book-list/book-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -19,12 +23,16 @@ import { AdminRoutingModule } from './admin/admin-routing.module';
     ClientHomeComponent,
     AdminComponent,
     AdminHomeComponent,
+    NavbarComponent,
+    BookListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ClientRoutingModule,
     AdminRoutingModule,
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
