@@ -10,10 +10,10 @@ const routes: Routes = [
     component: ClientComponent,
     children : [
       {
-        path : '', component:ClientHomeComponent,
+        path : 'home', component:ClientHomeComponent,
       },
       {
-        path: 'bookList', // Corrected path definition
+        path: '', // Corrected path definition
         component: BookListComponent,
       }
     ]

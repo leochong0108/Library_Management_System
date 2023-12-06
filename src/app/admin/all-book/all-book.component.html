@@ -1,0 +1,143 @@
+<div class="container" style="height: 50vh;">
+  <input class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText" style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: center;">
+
+
+  <div class="" style="margin: 10px;">
+    <label>
+      <input type="checkbox" [(ngModel)]="searchByCategory"> Search by Category
+    </label>
+    <button class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 20px;">Add Book</button>
+    <button class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" style="margin-left: 10px;">Add Category</button>
+  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new book</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="addNewBook()">
+          <div class="mb-3">
+            <label for="book_Id" class="form-label">Book Id</label>
+            <input type="text" class="form-control" id="book_Id" [(ngModel)]="newBook.book_Id" name="book_Id" required>
+          </div>
+          <div class="mb-3">
+            <label for="book_Title" class="form-label">Book Title</label>
+            <input type="text" class="form-control" id="book_Title" [(ngModel)]="newBook.book_Title" name="book_Title" required>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" [(ngModel)]="newBook.author" name="author" required>
+          </div>
+          <div class="mb-3">
+            <label for="bookType" class="form-label">Select Book Type:</label>
+            <select id="bookType" [(ngModel)]="newBook.category_Id" name="category_Id" class="form-select" required>
+              <option *ngFor="let option of bookTypeOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCategoryLabel">Add new Category</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="addNewBook()">
+          <div class="mb-3">
+            <label for="category_Name" class="form-label">New Category Name</label>
+            <input type="text" class="form-control" id="category_Name" [(ngModel)]="newBook.book_Id" name="category_Name" required>
+          </div>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit book</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm" (ngSubmit)="updateBook()">
+          <div class="mb-3">
+            <label for="book_Id" class="form-label">Book ID</label>
+            <input type="text" class="form-control" id="book_Id" [(ngModel)]="selectedBook.book_Id" name="book_Id" required [disabled]="true">
+          </div>
+          <div class="mb-3">
+            <label for="book_Title" class="form-label">Book Title</label>
+            <input type="text" class="form-control" id="book_Title" [(ngModel)]="selectedBook.book_Title" name="book_Title" required>
+          </div>
+          <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <input type="text" class="form-control" id="author" [(ngModel)]="selectedBook.author" name="author" required>
+          </div>
+          <div class="mb-3">
+            <label for="bookType" class="form-label">Select Book Type:</label>
+            <select id="bookType" [(ngModel)]="selectedBook.category_Id" name="category_Id" class="form-select" required>
+              <option *ngFor="let option of bookTypeOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="table table-hover table-striped">
+    <!-- Table Header -->
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Book Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <!-- Table Body -->
+    <tbody>
+      <!-- Your table rows go here -->
+      <tr *ngFor="let b of filteredBook">
+        <td>{{ idToNameMapping[b.category_Id] }}</td>
+        <td>{{ b.book_Id }}</td>
+        <td>{{ b.book_Title }}</td>
+        <td>{{ b.author }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="openEditModal(b.book_Id)" data-bs-toggle="modal" data-bs-target="#editModal" style="margin: 10px;">Edit</button>
+          <button class="btn btn-danger" (click)="deleteData(b.book_Id.toString())">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</div>

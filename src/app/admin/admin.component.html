@@ -1,3 +1,11 @@
-<p>admin works!</p>
-<router-outlet></router-outlet>
-<app-admin-home></app-admin-home>
+<app-admin-header></app-admin-header>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

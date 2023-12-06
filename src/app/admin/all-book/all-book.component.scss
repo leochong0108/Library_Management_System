@@ -1,3 +1,13 @@
+.addButton{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.scrollable-container {
+  max-height: 900px; /* Set the desired height */
+  overflow-y: auto; /* Add a vertical scroll bar */
+}
+
 .table-container {
   max-height: 600px; /* Set your desired max height */
   overflow-y: auto;
@@ -20,3 +30,4 @@
   background-color: #f8f9fa; /* Set your desired background color */
   z-index: 1;
 }
+
